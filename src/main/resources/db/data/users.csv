@@ -1,0 +1,3 @@
+id,name,surname,patronymic,username,password,email,telephone,last_login,deleted,deletion_date
+1,Павел	,Степанов,Сергеевич	,stepanovps,,pstepanov87@mail.ru,+7(926)952-73-47,,false,
+2,Мария	,Степанова,Мария,stepanovam,,maria@stonesk.ru,+7(925)425-41-26,,false,

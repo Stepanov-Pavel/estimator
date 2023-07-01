@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+  postgres-estimator:
+    image: postgres
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: estimator
+      POSTGRES_USER: user

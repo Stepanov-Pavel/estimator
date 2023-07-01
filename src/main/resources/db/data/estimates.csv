@@ -1,0 +1,2 @@
+id,name,number,date,comment,total,total_with_discount,is_draft,deleted,deletion_date,user_id,organization_id,building_object_id,customer_id
+1,Смета на подоконники,2935_МС,2023-06-01,Смета просчитана по курсу доллара ЦБ РФ на 01.06.2023 г.,598794	,582291,false,false,,2,1,1,1

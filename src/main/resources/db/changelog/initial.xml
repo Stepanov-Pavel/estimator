@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <changeSet author="pstepanov" id="ini-1">
+        <createTable tableName="settings">
+            <column name="id" type="serial" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="settings_id_pk"/>
+            </column>
+            <column name="estimate_number_start_value" type="integer"/>
+            <column name="estimate_number_max_value" type="integer"/>
+            <column name="estimate_number_current_value" type="integer"/>
+        </createTable>
+        <createTable tableName="organization">
+            <column name="id" type="serial" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="organization_id_pk"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="addr" type="varchar(255)"/>
+            <column name="telephone" type="varchar(255)"/>
+            <column name="website" type="varchar(255)"/>
+            <column name="email" type="varchar(255)"/>
+            <column name="deleted" type="boolean"/>
+            <column name="deletion_date" type="date"/>
+        </createTable>
+        <createTable tableName="customer">
+            <column name="id" type="serial" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="customer_id_pk"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="surname" type="varchar(255)"/>
+            <column name="patronymic" type="varchar(255)"/>
+            <column name="email" type="varchar(25)">
+                <constraints unique="true"/>
+            </column>
+            <column name="telephone" type="varchar(255)"/>
+            <column name="deleted" type="boolean"/>
+            <column name="deletion_date" type="date"/>
+        </createTable>
+        <createTable tableName="user">
+            <column name="id" type="serial" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="user_id_pk"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="surname" type="varchar(255)"/>
+            <column name="patronymic" type="varchar(255)"/>
+            <column name="username" type="varchar(25)"/>
+            <column name="password" type="varchar(255)"/>
+            <column name="email" type="varchar(25)">
+                <constraints unique="true"/>
+            </column>
+            <column name="telephone" type="varchar(255)"/>
+            <column name="last_login" type="timestamp"/>
+            <column name="deleted" type="boolean"/>
+            <column name="deletion_date" type="date"/>
+        </createTable>
+        <createTable tableName="building_object">
+            <column name="id" type="serial" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="building_object_id_pk"/>
+            </column>
+            <column name="type" type="varchar(255)"/>
+            <column name="addr" type="varchar(255)"/>
+            <column name="note" type="varchar(1000)"/>
+            <column name="deleted" type="boolean"/>
+            <column name="deletion_date" type="date"/>
+        </createTable>
+        <createTable tableName="nomenclature">
+            <column name="id" type="serial" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="nomenclature_id_pk"/>
+            </column>
+            <column name="type" type="varchar(255)"/>
+            <column name="material" type="varchar(255)"/>
+            <column name="name" type="varchar(255)"/>
+            <column name="product" type="varchar(255)"/>
+            <column name="sizes" type="varchar(255)"/>
+            <column name="measurement_unit" type="varchar(25)"/>
+            <column name="deleted" type="boolean"/>
+            <column name="deletion_date" type="date"/>
+        </createTable>
+        <createTable tableName="price">
+            <column name="id" type="serial" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="price_id_pk"/>
+            </column>
+            <column name="cost" type="numeric(10,2)"/>
+            <column name="date_start" type="date"/>
+            <column name="date_end" type="date"/>
+            <column name="nomenclature_id" type="integer">
+                <constraints nullable="false" foreignKeyName="nomenclature_fk" references="nomenclature(id)"/>
+            </column>
+        </createTable>
+        <createTable tableName="estimate">
+            <column name="id" type="serial" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="estimate_id_pk"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="number" type="varchar(25)"/>
+            <column name="date" type="date"/>
+            <column name="comment" type="varchar(1000)"/>
+            <column name="total" type="numeric(10,2)"/>
+            <column name="total_with_discount" type="numeric(10,2)"/>
+            <column name="is_draft" type="boolean"/>
+            <column name="deleted" type="boolean"/>
+            <column name="deletion_date" type="date"/>
+            <column name="user_id" type="integer">
+                <constraints nullable="false" foreignKeyName="user_fk" references="user(id)"/>
+            </column>
+            <column name="organization_id" type="integer">
+                <constraints nullable="false" foreignKeyName="organization_fk" references="organization(id)"/>
+            </column>
+            <column name="building_object_id" type="integer">
+                <constraints nullable="false" foreignKeyName="building_object_fk" references="building_object(id)"/>
+            </column>
+            <column name="customer_id" type="integer">
+                <constraints nullable="false" foreignKeyName="customer_fk" references="customer(id)"/>
+            </column>
+        </createTable>
+        <createTable tableName="estimate_item">
+            <column name="id" type="serial" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="estimate_item_id_pk"/>
+            </column>
+            <column name="processing" type="varchar(255)"/>
+            <column name="quantity" type="numeric(4,2)"/>
+            <column name="price" type="numeric(10,2)"/>
+            <column name="amount" type="numeric(10,2)"/>
+            <column name="discount" type="integer"/>
+            <column name="price_with_discount" type="numeric(10,2)"/>
+            <column name="amount_with_discount" type="numeric(10,2)"/>
+            <column name="estimate_id" type="integer">
+                <constraints nullable="false" foreignKeyName="estimate_fk" references="estimate(id)"/>
+            </column>
+            <column name="nomenclature_id" type="integer">
+                <constraints nullable="false" foreignKeyName="nomenclature_fk" references="nomenclature(id)"/>
+            </column>
+        </createTable>
+        <createTable tableName="estimate_file">
+            <column name="id" type="serial" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="estimate_file_id_pk"/>
+            </column>
+            <column name="file" type="blob"/>
+            <column name="type" type="varchar(255)"/>
+            <column name="name_with_extension" type="varchar(255)"/>
+            <column name="estimate_id" type="integer">
+                <constraints nullable="false" foreignKeyName="estimate_fk" references="estimate(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="pstepanov" id="ini-2">
+        <loadData tableName="settings" file="db/data/settings.csv" relativeToChangelogFile="false"/>
+        <loadData tableName="organization" file="db/data/organizations.csv" relativeToChangelogFile="false"/>
+        <loadData tableName="customer" file="db/data/customers.csv" relativeToChangelogFile="false"/>
+        <loadData tableName="user" file="db/data/users.csv" relativeToChangelogFile="false"/>
+        <loadData tableName="building_object" file="db/data/building_objects.csv" relativeToChangelogFile="false"/>
+        <loadData tableName="nomenclature" file="db/data/nomenclatures.csv" relativeToChangelogFile="false"/>
+        <loadData tableName="price" file="db/data/prices.csv" relativeToChangelogFile="false"/>
+        <loadData tableName="estimate" file="db/data/estimates.csv" relativeToChangelogFile="false"/>
+        <loadData tableName="estimate_item" file="db/data/estimate_items.csv" relativeToChangelogFile="false"/>
+    </changeSet>
+</databaseChangeLog>

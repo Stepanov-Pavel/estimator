@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/estimator
+    username: user
+    password: password
+  liquibase:
+    change-log: classpath:db/master.xml
+    enabled: true

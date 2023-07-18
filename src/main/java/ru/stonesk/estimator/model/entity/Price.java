@@ -1,9 +1,7 @@
 package ru.stonesk.estimator.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import ru.stonesk.estimator.model.entity.nomenclature.Nomenclature;
 
 import java.math.BigDecimal;
@@ -15,8 +13,9 @@ import java.time.LocalDate;
 @Entity
 @Table
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
-@Setter
+@Builder
 public class Price {
 
     @Id
@@ -25,7 +24,7 @@ public class Price {
 
     @ManyToOne
     @JoinColumn(name = "nomenclature_id")
-    private Nomenclature nomenclatures;
+    private Nomenclature nomenclature;
 
     private BigDecimal cost;
     private LocalDate dateStart;

@@ -1,9 +1,7 @@
 package ru.stonesk.estimator.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import ru.stonesk.estimator.model.entity.nomenclature.Nomenclature;
 
 import java.math.BigDecimal;
@@ -14,8 +12,9 @@ import java.math.BigDecimal;
 @Entity
 @Table
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
-@Setter
+@Builder
 public class EstimateItem {
 
     @Id
@@ -24,11 +23,11 @@ public class EstimateItem {
 
     @ManyToOne
     @JoinColumn(name = "estimate_id")
-    private Estimate estimates;
+    private Estimate estimate;
 
     @ManyToOne
     @JoinColumn(name = "nomenclature_id")
-    private Nomenclature nomenclatures;
+    private Nomenclature nomenclature;
 
     private String processing;
     private BigDecimal quantity;

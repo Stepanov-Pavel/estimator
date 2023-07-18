@@ -1,0 +1,2 @@
+INSERT INTO nomenclature (id,deleted,deletion_date,material,measurement_unit,name,product,sizes,type)
+    VALUES (1,false,null,'Материал','Единица Измерения','Название','Изделие','0000x0000x0000','MATERIAL');

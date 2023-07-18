@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Immutable;
 
 /**
  * Storing application settings
@@ -12,7 +13,7 @@ import lombok.Setter;
 @Table
 @NoArgsConstructor
 @Getter
-@Setter
+@Immutable
 public class Settings {
 
     @Id

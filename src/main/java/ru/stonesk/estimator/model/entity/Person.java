@@ -1,22 +1,21 @@
 package ru.stonesk.estimator.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
- * User of system (and the employee in one person) who calculates estimate
+ * Person of system (and the employee in one person) who calculates estimate
  */
 @Entity
 @Table
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
-@Setter
-public class User {
+@Builder
+public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

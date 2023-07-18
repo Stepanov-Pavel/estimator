@@ -38,9 +38,9 @@
             <column name="deleted" type="boolean"/>
             <column name="deletion_date" type="date"/>
         </createTable>
-        <createTable tableName="user">
+        <createTable tableName="person">
             <column name="id" type="serial" autoIncrement="true">
-                <constraints primaryKey="true" primaryKeyName="user_id_pk"/>
+                <constraints primaryKey="true" primaryKeyName="person_id_pk"/>
             </column>
             <column name="name" type="varchar(255)"/>
             <column name="surname" type="varchar(255)"/>
@@ -102,8 +102,8 @@
             <column name="is_draft" type="boolean"/>
             <column name="deleted" type="boolean"/>
             <column name="deletion_date" type="date"/>
-            <column name="user_id" type="integer">
-                <constraints nullable="false" foreignKeyName="user_fk" references="user(id)"/>
+            <column name="person_id" type="integer">
+                <constraints nullable="false" foreignKeyName="person_fk" references="person(id)"/>
             </column>
             <column name="organization_id" type="integer">
                 <constraints nullable="false" foreignKeyName="organization_fk" references="organization(id)"/>
@@ -149,7 +149,7 @@
         <loadData tableName="settings" file="db/data/settings.csv" relativeToChangelogFile="false"/>
         <loadData tableName="organization" file="db/data/organizations.csv" relativeToChangelogFile="false"/>
         <loadData tableName="customer" file="db/data/customers.csv" relativeToChangelogFile="false"/>
-        <loadData tableName="user" file="db/data/users.csv" relativeToChangelogFile="false"/>
+        <loadData tableName="person" file="db/data/persons.csv" relativeToChangelogFile="false"/>
         <loadData tableName="building_object" file="db/data/building_objects.csv" relativeToChangelogFile="false"/>
         <loadData tableName="nomenclature" file="db/data/nomenclatures.csv" relativeToChangelogFile="false"/>
         <loadData tableName="price" file="db/data/prices.csv" relativeToChangelogFile="false"/>

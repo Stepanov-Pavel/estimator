@@ -1,9 +1,7 @@
 package ru.stonesk.estimator.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -14,8 +12,9 @@ import java.time.LocalDate;
 @Entity
 @Table
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
-@Setter
+@Builder
 public class Estimate {
 
     @Id
@@ -23,20 +22,20 @@ public class Estimate {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User users;
+    @JoinColumn(name = "person_id")
+    private Person person;
 
     @ManyToOne
     @JoinColumn(name = "organization_id")
-    private Organization organizations;
+    private Organization organization;
 
     @ManyToOne
     @JoinColumn(name = "building_object_id")
-    private BuildingObject buildingObjects;
+    private BuildingObject buildingObject;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    private Customer customers;
+    private Customer customer;
 
     private String name;
     private String number;

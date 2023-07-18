@@ -1,9 +1,10 @@
 package ru.stonesk.estimator.model.entity.nomenclature;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDate;
 
@@ -13,8 +14,9 @@ import java.time.LocalDate;
 @Entity
 @Table
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
-@Setter
+@Builder
 public class Nomenclature {
 
     @Id
@@ -28,7 +30,7 @@ public class Nomenclature {
     private String name;
     private String product;
     private String sizes;
-    private String measurement_unit;
+    private String measurementUnit;
     private Boolean deleted;
     private LocalDate deletionDate;
 }

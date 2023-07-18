@@ -1,9 +1,7 @@
 package ru.stonesk.estimator.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * File storage for which estimate is calculated
@@ -11,9 +9,10 @@ import lombok.Setter;
 @Entity
 @Table
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
-@Setter
-public class EstimateFiles {
+@Builder
+public class EstimateFile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +23,7 @@ public class EstimateFiles {
 
     @ManyToOne
     @JoinColumn(name = "estimate_id")
-    private Estimate estimates;
+    private Estimate estimate;
 
     private String type;
     private String nameWithExtension;

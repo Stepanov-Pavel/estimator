@@ -1,9 +1,7 @@
 package ru.stonesk.estimator.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -13,17 +11,18 @@ import java.time.LocalDate;
 @Entity
 @Table
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
-@Setter
+@Builder
 public class BuildingObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer type;
-    private Integer addr;
-    private Integer note;
+    private String type;
+    private String addr;
+    private String note;
     private Boolean deleted;
     private LocalDate deletionDate;
 }

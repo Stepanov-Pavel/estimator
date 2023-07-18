@@ -9,5 +9,4 @@ public class EstimatorApplication {
     public static void main(String[] args) {
         SpringApplication.run(EstimatorApplication.class, args);
     }
-
 }

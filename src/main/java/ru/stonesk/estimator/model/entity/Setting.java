@@ -3,7 +3,6 @@ package ru.stonesk.estimator.model.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.annotations.Immutable;
 
 /**
@@ -14,7 +13,7 @@ import org.hibernate.annotations.Immutable;
 @NoArgsConstructor
 @Getter
 @Immutable
-public class Settings {
+public class Setting {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

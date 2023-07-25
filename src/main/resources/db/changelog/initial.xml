@@ -4,7 +4,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
     <changeSet author="pstepanov" id="ini-1">
-        <createTable tableName="settings">
+        <createTable tableName="setting">
             <column name="id" type="serial" autoIncrement="true">
                 <constraints primaryKey="true" primaryKeyName="settings_id_pk"/>
             </column>
@@ -146,7 +146,7 @@
         </createTable>
     </changeSet>
     <changeSet author="pstepanov" id="ini-2">
-        <loadData tableName="settings" file="db/data/settings.csv" relativeToChangelogFile="false"/>
+        <loadData tableName="setting" file="db/data/settings.csv" relativeToChangelogFile="false"/>
         <loadData tableName="organization" file="db/data/organizations.csv" relativeToChangelogFile="false"/>
         <loadData tableName="customer" file="db/data/customers.csv" relativeToChangelogFile="false"/>
         <loadData tableName="person" file="db/data/persons.csv" relativeToChangelogFile="false"/>

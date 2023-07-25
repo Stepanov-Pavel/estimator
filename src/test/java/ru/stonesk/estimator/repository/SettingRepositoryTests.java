@@ -1,9 +1,8 @@
 package ru.stonesk.estimator.repository;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import ru.stonesk.estimator.model.entity.Settings;
+import ru.stonesk.estimator.model.entity.Setting;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -12,12 +11,13 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @DataJpaTest
-class SettingsRepositoryTests {
+class SettingRepositoryTests {
 
     @Test
     void assertEntityWithAllFields() {
-        Field[] declaredFields = Settings.class.getDeclaredFields();
+        Field[] declaredFields = Setting.class.getDeclaredFields();
         Map<String, ? extends Class<?>> expectedFields = Arrays.stream(declaredFields)
                 .collect(Collectors.toMap(Field::getName, Field::getType));
         Map<String, ? extends Class<?>> actualFields = Map.of(

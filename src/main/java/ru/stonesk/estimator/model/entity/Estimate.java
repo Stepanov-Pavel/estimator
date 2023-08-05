@@ -1,7 +1,13 @@
 package ru.stonesk.estimator.model.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
+import org.hibernate.annotations.SQLDelete;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -10,12 +16,17 @@ import java.time.LocalDate;
  * General information about calculations of estimate
  */
 @Entity
-@Table
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
-@Builder
-public class Estimate {
+@NoArgsConstructor
+@SuperBuilder
+@SQLDelete(sql = """
+        UPDATE estimate
+            SET deleted = true, deletion_date = CURRENT_DATE
+        WHERE id = ?
+        """)
+@FilterDef(name = "deletedEstimateFilter", parameters = @ParamDef(name = "isDeleted", type = Boolean.class))
+@Filter(name = "deletedEstimateFilter", condition = "deleted = :isDeleted")
+public class Estimate extends SoftDeletable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,6 +55,4 @@ public class Estimate {
     private BigDecimal total;
     private BigDecimal totalWithDiscount;
     private Boolean isDraft;
-    private Boolean deleted;
-    private LocalDate deletionDate;
 }

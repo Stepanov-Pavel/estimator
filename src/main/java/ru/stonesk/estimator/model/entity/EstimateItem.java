@@ -1,7 +1,10 @@
 package ru.stonesk.estimator.model.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import ru.stonesk.estimator.model.entity.nomenclature.Nomenclature;
 
 import java.math.BigDecimal;
@@ -10,7 +13,6 @@ import java.math.BigDecimal;
  * Representation of calculation each estimate record
  */
 @Entity
-@Table
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

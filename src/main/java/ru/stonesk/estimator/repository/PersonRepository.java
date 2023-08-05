@@ -8,19 +8,8 @@ import ru.stonesk.estimator.model.entity.Person;
 public interface PersonRepository extends JpaRepository<Person, Integer> {
 
     /**
-     * Set field "deleted" on value TRUE, and field "deletionDate" on value current date
-     * @param id entity identifier
-     * @return number modified rows
-     */
-    @Modifying
-    @Query("""
-            UPDATE Person p
-                SET p.deleted = true, p.deletionDate = current_date
-            WHERE id = :id""")
-    int modifyDeletionMarkOnTrue(int id);
-
-    /**
      * Set field "deleted" on value FALSE, and field "deletionDate" on value NULL
+     *
      * @param id entity identifier
      * @return number modified rows
      */
@@ -28,6 +17,7 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
     @Query("""
             UPDATE Person p
                 SET p.deleted = false, p.deletionDate = null
-            WHERE id = :id""")
+            WHERE id = :id
+            """)
     int modifyDeletionMarkOnFalse(int id);
 }

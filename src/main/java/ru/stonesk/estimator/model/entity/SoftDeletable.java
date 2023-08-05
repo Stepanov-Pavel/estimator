@@ -1,6 +1,5 @@
 package ru.stonesk.estimator.model.entity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

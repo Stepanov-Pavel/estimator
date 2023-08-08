@@ -1,21 +1,34 @@
 package ru.stonesk.estimator.model.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
+import org.hibernate.annotations.SQLDelete;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
  * Person of system (and the employee in one person) who calculates estimate
  */
 @Entity
-@Table
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
-@Builder
-public class Person {
+@NoArgsConstructor
+@SuperBuilder
+@SQLDelete(sql = """
+        UPDATE person
+            SET deleted = true, deletion_date = CURRENT_DATE
+        WHERE id = ?
+        """)
+@FilterDef(name = "deletedPersonFilter", parameters = @ParamDef(name = "isDeleted", type = Boolean.class))
+@Filter(name = "deletedPersonFilter", condition = "deleted = :isDeleted")
+public class Person extends SoftDeletable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +42,4 @@ public class Person {
     private String email;
     private String telephone;
     private LocalDateTime lastLogin;
-    private Boolean deleted;
-    private LocalDate deletionDate;
 }

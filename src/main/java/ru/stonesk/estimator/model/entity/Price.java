@@ -1,7 +1,10 @@
 package ru.stonesk.estimator.model.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import ru.stonesk.estimator.model.entity.nomenclature.Nomenclature;
 
 import java.math.BigDecimal;
@@ -11,7 +14,6 @@ import java.time.LocalDate;
  * Prices of nomenclature items with expiration dates
  */
 @Entity
-@Table
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

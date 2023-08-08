@@ -1,13 +1,15 @@
 package ru.stonesk.estimator.model.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * File storage for which estimate is calculated
  */
 @Entity
-@Table
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

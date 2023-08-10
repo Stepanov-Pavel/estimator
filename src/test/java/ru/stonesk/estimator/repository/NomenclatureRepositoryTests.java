@@ -4,12 +4,15 @@ import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import ru.stonesk.estimator.model.entity.BuildingObject;
 import ru.stonesk.estimator.model.entity.nomenclature.Nomenclature;
 import ru.stonesk.estimator.model.entity.nomenclature.NomenclatureType;
 
 import java.lang.reflect.Field;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -25,7 +28,10 @@ class NomenclatureRepositoryTests {
     @Test
     void assertEntityWithAllFields() {
         Field[] declaredFields = Nomenclature.class.getDeclaredFields();
-        Map<String, ? extends Class<?>> expectedFields = Arrays.stream(declaredFields)
+        Field[] declaredSuperclassFields = BuildingObject.class.getSuperclass().getDeclaredFields();
+        List<Field> fields = new ArrayList<>(Arrays.asList(declaredFields));
+        fields.addAll(Arrays.asList(declaredSuperclassFields));
+        Map<String, ? extends Class<?>> expectedFields = fields.stream()
                 .collect(Collectors.toMap(Field::getName, Field::getType));
         Map<String, ? extends Class<?>> actualFields = Map.of(
                 "id", Integer.class,

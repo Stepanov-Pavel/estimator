@@ -8,7 +8,9 @@ import ru.stonesk.estimator.model.entity.BuildingObject;
 
 import java.lang.reflect.Field;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -24,7 +26,10 @@ class BuildingObjectRepositoryTests {
     @Test
     void assertEntityWithAllFields() {
         Field[] declaredFields = BuildingObject.class.getDeclaredFields();
-        Map<String, ? extends Class<?>> expectedFields = Arrays.stream(declaredFields)
+        Field[] declaredSuperclassFields = BuildingObject.class.getSuperclass().getDeclaredFields();
+        List<Field> fields = new ArrayList<>(Arrays.asList(declaredFields));
+        fields.addAll(Arrays.asList(declaredSuperclassFields));
+        Map<String, ? extends Class<?>> expectedFields = fields.stream()
                 .collect(Collectors.toMap(Field::getName, Field::getType));
         Map<String, ? extends Class<?>> actualFields = Map.of(
                 "id", Integer.class,
